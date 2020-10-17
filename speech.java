@@ -17,24 +17,24 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-TextView textView;
+TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView=findViewById(R.id.textView);
+        text=findViewById(R.id.textView);
     }
 
     public void speech_to_text(View view) {
         Intent intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT," बोल रे ");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT," Ask anything  ");
         try {
             startActivityForResult(intent, 1);
         }
         catch (ActivityNotFoundException event){
-            Toast.makeText(this, "this app is not worked properly", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Somthing error", Toast.LENGTH_SHORT).show();
         } }
 
     @Override
@@ -44,7 +44,7 @@ TextView textView;
             case 1:
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    textView.setText(result.get(0));}
+                    text.setText(result.get(0));}
                     break;
                 }
         }
